@@ -1,5 +1,6 @@
 package com.example.bootsecurity.controllers;
 
+import com.example.bootsecurity.entity.Role;
 import com.example.bootsecurity.entity.User;
 import com.example.bootsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -42,6 +44,7 @@ public class AdminController {
 
     @PostMapping("/admin/create")
     public String createUser(User user){
+        user.setRoles(Collections.singleton(new Role(1L)));
         userService.saveUser(user);
         return "redirect:/admin";
     }
@@ -61,6 +64,7 @@ public class AdminController {
 
     @PostMapping("/admin/update")
     public String updateUser(User user){
+        user.setRoles(user.getRoles());
         userService.saveUser(user);
         return "redirect:/admin";
     }

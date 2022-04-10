@@ -2,7 +2,6 @@ package com.example.bootsecurity.service;
 
 import com.example.bootsecurity.entity.Role;
 import com.example.bootsecurity.entity.User;
-import com.example.bootsecurity.repository.RoleRepository;
 import com.example.bootsecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -37,8 +35,9 @@ public class UserService implements UserDetailsService {
         return userRepository.getById(id);
     }
 
-    public User saveUser(User user){
-        return userRepository.save(user);
+    public void saveUser(User user){
+
+        userRepository.save(user);
     }
 
     public void deleteById(long id){
