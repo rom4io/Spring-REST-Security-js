@@ -25,6 +25,8 @@
     </tbody>
 </table>
 <p/>
-<a th:href="logout">Logout</a>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
 </body>
 </html>

@@ -14,7 +14,7 @@
     <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name">
     <p/>
     <label for="age">Age</label>
-    <input type="text" th:field="*{age}" id="age" placeholder="Age">
+    <input type="number" th:field="*{age}" id="age" placeholder="Age">
     <p/>
     <label for="password">Password</label>
     <input type="text" th:field="*{password}" id="password" placeholder="Password">
@@ -29,8 +29,12 @@
 <!--        </label>-->
 <!--    </p>-->
     <input type="submit" value="Create User">
+
 </form>
 <p/>
-<a th:href="logout">Logout</a>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
 </body>
 </html>

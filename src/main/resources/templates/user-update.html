@@ -25,7 +25,9 @@
   <br/>
   <input type="submit" value="Update User">
   <p/>
-  <a th:href="logout">Logout</a>
+</form>
+<form th:action="@{/logout}" method="post">
+  <input type="submit" value="Logout"/>
 </form>
 </body>
 </html>

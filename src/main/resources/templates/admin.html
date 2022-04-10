@@ -33,8 +33,10 @@
         <p/>
         <a th:href="@{admin/create}">Create</a>
         <p/>
-        <a th:href="logout">Logout</a>
     </div>
 </div>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
 </body>
 </html>
