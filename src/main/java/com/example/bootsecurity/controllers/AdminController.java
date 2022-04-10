@@ -2,11 +2,13 @@ package com.example.bootsecurity.controllers;
 
 import com.example.bootsecurity.entity.Role;
 import com.example.bootsecurity.entity.User;
+import com.example.bootsecurity.service.RoleService;
 import com.example.bootsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -19,6 +21,8 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleService roleService;
 
     @GetMapping(value = "/admin")
     public String findAll(Model model){
@@ -38,18 +42,21 @@ public class AdminController {
     }
 
     @GetMapping("/admin/create")
-    public String createUserForm(User user){
+    public String createUserForm(Model model){
+        model.addAttribute("user", new User());
+        List<Role> roles = roleService.getRoleList();
+        model.addAttribute("allRoles",roles);
         return "user-create";
     }
 
     @PostMapping("/admin/create")
-    public String createUser(User user){
-        user.setRoles(Collections.singleton(new Role(1L)));
+    public String createUser(@ModelAttribute("user") User user){
+      //  user.setRoles(Collections.singleton(new Role(1L)));
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
-    @GetMapping(value = "admin/delete/{id}")
+    @GetMapping("admin/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id){
         userService.deleteById(id);
         return "redirect:/admin";
