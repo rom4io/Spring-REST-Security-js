@@ -29,31 +29,27 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User findUserById(Long id){
-        Optional<User> userFromDB = userRepository.findById(id);
-        return userFromDB.orElse(new User());
-    }
-
-    public List<User> allUser(){
+    public List<User> findAll(){
         return userRepository.findAll();
     }
 
-    public boolean saveUser(User user){
-        User userFromDB = userRepository.findByUsername(user.getUsername());
-        if (userFromDB != null){
-            return false;
-        }
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-        user.setPassword(user.getPassword());
-        userRepository.save(user);
-        return true;
+    public User findById(Long id){
+        return userRepository.getById(id);
     }
 
-    public boolean deleteUser (Long id){
-        if(userRepository.findById(id).isPresent()){
-            userRepository.deleteById(id);
-            return true;
-        }
-        return false;
+    public User saveUser(User user){
+        return userRepository.save(user);
+    }
+
+    public void deleteById(long id){
+        userRepository.deleteById(id);
+    }
+
+    public List<User> saveList(List<User> users){
+        return userRepository.saveAll(users);
+    }
+
+    public User findByName(String name){
+        return userRepository.findByUsername(name);
     }
 }
