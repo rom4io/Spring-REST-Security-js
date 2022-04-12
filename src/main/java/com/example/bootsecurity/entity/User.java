@@ -2,6 +2,7 @@ package com.example.bootsecurity.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -18,7 +19,7 @@ public class User implements UserDetails {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
     @Column(name = "username")
-    private String username;
+    private String name;
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "age")
@@ -28,7 +29,7 @@ public class User implements UserDetails {
 //    @Transient
 //    private String passwordConfirm;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "users_roles",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "roles_id"))
@@ -37,8 +38,8 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String email, String username, String lastName, int age, String password, Set<Role> roleSet) {
-        this.username = username;
+    public User(String email, String name, String lastName, int age, String password, Set<Role> roleSet) {
+        this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.password = password;
@@ -77,10 +78,6 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getLastName() {
@@ -142,5 +139,13 @@ public class User implements UserDetails {
 
     public void setRoleSet(Set<Role> roleSet) {
         this.roleSet = roleSet;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
