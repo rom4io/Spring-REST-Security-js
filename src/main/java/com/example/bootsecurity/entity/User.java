@@ -24,7 +24,7 @@ public class User implements UserDetails {
     private String lastName;
     @Column(name = "age")
     private int age;
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 //    @Transient
 //    private String passwordConfirm;
