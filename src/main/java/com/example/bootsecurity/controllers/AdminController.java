@@ -5,13 +5,11 @@ import com.example.bootsecurity.entity.User;
 import com.example.bootsecurity.service.RoleService;
 import com.example.bootsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,21 +29,22 @@ public class AdminController {
     }
 
     @GetMapping(value = "/admin")
-    public String findAll(Model model) {
+    public String findAll(@AuthenticationPrincipal User user, Model model) {
 
+        model.addAttribute("user", user);
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
-        return "admin";
+        return "index";
     }
 
-    @GetMapping(value = "/admin/{id}")
-    public String findById(@PathVariable("id") Long id, Model model) {
-        User user = userService.findById(id);
-        List<User> users = new ArrayList<>();
-        users.add(user);
-        model.addAttribute("users", users);
-        return "admin";
-    }
+//    @GetMapping(value = "/admin/{id}")
+//    public String findById(@PathVariable("id") Long id, Model model) {
+//        User user = userService.findById(id);
+//        List<User> users = new ArrayList<>();
+//        users.add(user);
+//        model.addAttribute("users", users);
+//        return "admin";
+//    }
 
     @GetMapping("/admin/create")
     public String createUserForm(Model model) {
@@ -57,9 +56,9 @@ public class AdminController {
 
     @PostMapping("/admin/create")
     public String createUser(@ModelAttribute("user") User user) {
-        if(userDetailsService.loadUserByUsername(user.getEmail())!= null){
-            throw new RuntimeException("User with the email is exist");
-        }
+//        if(userDetailsService.loadUserByUsername(user.getEmail())!= null){
+//            throw new RuntimeException("User with the email is exist");
+//        }
         user.setRoles(Collections.singleton(new Role(1L)));
         userService.saveUser(user);
         return "redirect:/admin";
@@ -71,17 +70,18 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/admin/update/{id}")
-    public String updateUserForm(@PathVariable("id") Long id, Model model) {
-        User user = userService.findById(id);
-        model.addAttribute("user", user);
-        return "user-update";
-    }
+//    @GetMapping("/admin/update/{id}")
+//    public String updateUserForm(@PathVariable("id") Long id, Model model) {
+//        User user = userService.findById(id);
+//        model.addAttribute("user", user);
+//        return "user-update";
+//    }
 
-    @PostMapping("/admin/update")
-    public String updateUser(User user) {
+    @PostMapping("/admin/{id}")
+    public String updateUser(@ModelAttribute("user") User user,
+                             @RequestParam(value = "select_roles", required = false) String[] role) {
         user.setRoles(user.getRoles());
-        userService.saveUser(user);
+        userService.update(user, role);
         return "redirect:/admin";
     }
 
