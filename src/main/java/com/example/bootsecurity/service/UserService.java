@@ -47,13 +47,13 @@ public class UserService{
 
     public void update(User user, String[] role) {
         Set<Role> rol = new HashSet<>();
-//        for (String s : role) {
-//            if (s.equals("ROLE_ADMIN")) {
-//                rol.add(showRole(1L));
-//            } else {
-//                rol.add(showRole(2L));
-//            }
-//        }
+        for (String s : role) {
+            if (s.equals("ROLE_ADMIN")) {
+                rol.add(showRole(2L));
+            } else {
+                rol.add(showRole(1L));
+            }
+        }
         user.setRoles(rol);
         userRepository.save(user);
     }

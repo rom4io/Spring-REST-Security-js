@@ -34,6 +34,7 @@ public class AdminController {
         model.addAttribute("user", user);
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
+        model.addAttribute("allRoles", roleService.getRoleList());
         return "index";
     }
 

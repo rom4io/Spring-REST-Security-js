@@ -116,60 +116,67 @@
                                                             <div align="center">
                                                                 <div class="modal-body">
                                                                     <div class="modal-body">
-                                                                        <label for="id" class="col-form-label">ID</label>
-                                                                        <input type="number" class="form-control mb-6 col-8" disabled
+                                                                        <label for="id" class="col-form-label"><strong>ID</strong></label>
+                                                                        <p/>
+                                                                        <input type="number" class="form-control-sm" disabled
                                                                                id="id"
                                                                                name="id"
                                                                                th:value="${user.getId()}">
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label for="name" class="col-form-label">First name</label>
-                                                                        <input type="text" class="form-control mb-6 col-8"
+                                                                        <label for="name" class="col-form-label"><strong>First name</strong></label>
+                                                                        <p/>
+                                                                        <input type="text" class="form-control-sm"
                                                                                id="name"
                                                                                name="name"
                                                                                th:value="${user.getUsername()}">
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label for="lastName" class="col-form-label">Last name</label>
-                                                                        <input type="text" class="form-control mb-6 col-8"
+                                                                        <label for="lastName" class="col-form-label"><strong>Last name</strong></label>
+                                                                        <p/>
+                                                                        <input type="text" class="form-control-sm"
                                                                                id="lastName"
                                                                                name="lastName"
                                                                                th:value="${user.getLastName()}">
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label for="age" class="col-form-label">Age</label>
-                                                                        <input type="text" class="form-control mb-6 col-8"
+                                                                        <label for="age" class="col-form-label"><strong>Age</strong></label>
+                                                                        <p/>
+                                                                        <input type="text" class="form-control-sm"
                                                                                id="age"
                                                                                name="age"
                                                                                th:value="${user.getAge()}">
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label for="email" class="col-form-label">Email</label>
-                                                                        <input type="text" class="form-control mb-6 col-8"
+                                                                        <label for="email" class="col-form-label"><strong>Email</strong></label>
+                                                                        <p/>
+                                                                        <input type="text" class="form-control-sm"
                                                                                id="email"
                                                                                name="email"
                                                                                th:value="${user.getEmail()}">
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label for="password" class="col-form-label">Password</label>
-                                                                        <input type="text" class="form-control mb-6 col-8"
+                                                                        <label for="password" class="col-form-label"><strong>Password</strong></label>
+                                                                        <p/>
+                                                                        <input type="text" class="form-control-sm"
                                                                                id="password"
                                                                                name="password"
                                                                                th:value="${user.getPassword()}">
                                                                     </div>
 
                                                                     <div>
-                                                                        <label>Role:
+                                                                        <label><strong>Role</strong>
+
                                                                             <select multiple size="2" name="select_roles" class="form-control"
                                                                                     id="exampleFormControlSelect1">
-                                                                                <option th:each="role : ${allRoles}" th:value="${role.getRole()}"
+                                                                                <option th:each="role : ${allRoles}" th:value="${role.getName()}"
                                                                                         th:text="${role.getAuthority() == 'ROLE_ADMIN'} ? 'ROLE_ADMIN' : 'ROLE_USER'"
-                                                                                        class="form-control mb-1"></option>
+                                                                                        class="form-control-sm"></option>
                                                                             </select>
                                                                         </label>
                                                                     </div>
@@ -213,6 +220,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="text-center">
+
                                                                     <div class="form-group">
                                                                         <label for="formGroupExampleInputID"><strong>
                                                                             ID
@@ -223,6 +231,7 @@
                                                                                id="formGroupExampleInputID"
                                                                                placeholder="ID" readonly>
                                                                     </div>
+
                                                                     <div class="form-group">
                                                                         <label for="formGroupExampleInputFirstname"><strong>
                                                                             First name
@@ -233,6 +242,7 @@
                                                                                id="formGroupExampleInputFirstname"
                                                                                placeholder="First name" readonly>
                                                                     </div>
+
                                                                     <div class="form-group">
                                                                         <label for="formGroupExampleInputLastname"><strong>
                                                                             Last name
@@ -244,6 +254,7 @@
                                                                                id="formGroupExampleInputLastname"
                                                                                placeholder="Last name" readonly>
                                                                     </div>
+
                                                                     <div class="form-group">
                                                                         <label for="formGroupExampleInputAge"><strong>
                                                                             Age
@@ -254,6 +265,7 @@
                                                                                id="formGroupExampleInputAge"
                                                                                placeholder="First name" readonly>
                                                                     </div>
+
                                                                     <div class="form-group">
                                                                         <label for="formGroupExampleInputEmail"><strong>
                                                                             Email
@@ -265,6 +277,7 @@
                                                                                id="formGroupExampleInputEmail"
                                                                                placeholder="First name" readonly>
                                                                     </div>
+
                                                                     <div class="form-group">
                                                                         <label for="exampleFormControlSelectRole"><strong>
                                                                             Role
@@ -278,6 +291,7 @@
                                                                             <option value="ROLE_USER">User</option>
                                                                         </select>
                                                                     </div>
+
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
