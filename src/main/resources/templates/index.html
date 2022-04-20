@@ -16,7 +16,7 @@
     <p class="navbar-brand text-white">
         <b><span class="align-middle" th:text="${user.getEmail()}"></span></b>
         <span class="align-middle">with roles:</span>
-        <span class="align-middle" th:each="role: ${user.getRoles()}" th:text="${role.getName()} + ' '"></span>
+        <span class="align-middle" th:each="role:${user.getRoles()}" th:text="${role.getName()}"></span>
     </p>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
@@ -118,14 +118,17 @@
                                                                     <div class="modal-body">
                                                                         <label for="id" class="col-form-label"><strong>ID</strong></label>
                                                                         <p/>
-                                                                        <input type="number" class="form-control-sm" disabled
+                                                                        <input type="number" class="form-control-sm"
+                                                                               disabled
                                                                                id="id"
                                                                                name="id"
                                                                                th:value="${user.getId()}">
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label for="name" class="col-form-label"><strong>First name</strong></label>
+                                                                        <label for="name"
+                                                                               class="col-form-label"><strong>First
+                                                                            name</strong></label>
                                                                         <p/>
                                                                         <input type="text" class="form-control-sm"
                                                                                id="name"
@@ -134,7 +137,9 @@
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label for="lastName" class="col-form-label"><strong>Last name</strong></label>
+                                                                        <label for="lastName"
+                                                                               class="col-form-label"><strong>Last
+                                                                            name</strong></label>
                                                                         <p/>
                                                                         <input type="text" class="form-control-sm"
                                                                                id="lastName"
@@ -152,7 +157,8 @@
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label for="email" class="col-form-label"><strong>Email</strong></label>
+                                                                        <label for="email"
+                                                                               class="col-form-label"><strong>Email</strong></label>
                                                                         <p/>
                                                                         <input type="text" class="form-control-sm"
                                                                                id="email"
@@ -161,7 +167,8 @@
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label for="password" class="col-form-label"><strong>Password</strong></label>
+                                                                        <label for="password"
+                                                                               class="col-form-label"><strong>Password</strong></label>
                                                                         <p/>
                                                                         <input type="text" class="form-control-sm"
                                                                                id="password"
@@ -169,12 +176,15 @@
                                                                                th:value="${user.getPassword()}">
                                                                     </div>
 
-                                                                    <div>
+                                                                    <div class="form-group">
                                                                         <label><strong>Role</strong>
 
-                                                                            <select multiple size="2" name="select_roles" class="form-control"
+                                                                            <select multiple size="2"
+                                                                                    name="select_roles"
+                                                                                    class="form-control"
                                                                                     id="exampleFormControlSelect1">
-                                                                                <option th:each="role : ${allRoles}" th:value="${role.getName()}"
+                                                                                <option th:each="role : ${allRoles}"
+                                                                                        th:value="${role.getName()}"
                                                                                         th:text="${role.getAuthority() == 'ROLE_ADMIN'} ? 'ROLE_ADMIN' : 'ROLE_USER'"
                                                                                         class="form-control-sm"></option>
                                                                             </select>
@@ -317,7 +327,60 @@
                                 <h4>Add new user</h4>
                             </div>
                             <div class="container-fluid border bg-white">
-                                Здесь форма для создания юзера
+                                <form th:action="@{/admin/create}" th:object="${user}" method="post">
+                                    <div class="text-center">
+                                        <div class="form-group">
+                                            <label for="name"><strong>First name</strong></label>
+                                            <p/>
+                                            <input type="text" class="form-control-sm" th:field="*{name}" id="name"
+                                                   placeholder="Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastName"><strong>Last name</strong></label>
+                                            <p/>
+                                            <input type="text" class="form-control-sm" th:field="*{lastName}"
+                                                   id="lastName"
+                                                   placeholder="Last Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="age"><strong>Age</strong></label>
+                                            <p/>
+                                            <input type="number" class="form-control-sm" th:field="*{age}" id="age"
+                                                   placeholder="Age">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email"><strong>Email</strong></label>
+                                            <p/>
+                                            <input type="text" class="form-control-sm" th:field="*{email}" id="email"
+                                                   placeholder="Email">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="password"><strong>Password</strong></label>
+                                            <p/>
+                                            <input type="password" class="form-control-sm" th:field="*{password}"
+                                                   id="password"
+                                                   placeholder="Password">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><strong>Role</strong>
+
+                                                <select multiple size="2"
+                                                        name="select_roles"
+                                                        class="form-control"
+                                                        id="role">
+                                                    <option th:each="role : ${allRoles}"
+                                                            th:value="${role.getName()}"
+                                                            th:text="${role.getAuthority() == 'ROLE_ADMIN'} ? 'ROLE_ADMIN' : 'ROLE_USER'"
+                                                            class="form-control-sm"></option>
+                                                </select>
+                                            </label>
+                                        </div>
+
+                                        <input type="submit" value="Create User">
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -343,14 +406,24 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>mail@mail.ru</td>
-                                <td>User</td>
-                            </tr>
+                            <form th:method="get"
+                                  th:action="@{/user}"
+                                  th:object="${user}">
+                                <tr th:each="user : ${user}">
+                                    <td th:text="${user.id}"></td>
+                                    <td th:text="${user.getName()}"></td>
+                                    <td th:text="${user.getLastName()}"></td>
+                                    <td th:text="${user.getAge()}"></td>
+                                    <td th:text="${user.getUsername()}"></td>
+                                    <td>
+                                        <div th:each="userRoles : ${user.getRoles()}"
+                                             th:switch="${userRoles.getName()}">
+                                            <p th:case="ROLE_USER">User</p>
+                                            <p th:case="ROLE_ADMIN">Admin</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </form>
                             </tbody>
                         </table>
                     </div>

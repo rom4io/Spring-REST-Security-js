@@ -11,9 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class AdminController {
@@ -47,21 +45,29 @@ public class AdminController {
 //        return "admin";
 //    }
 
-    @GetMapping("/admin/create")
-    public String createUserForm(Model model) {
-        model.addAttribute("user", new User());
-        List<Role> roles = roleService.getRoleList();
-        model.addAttribute("allRoles", roles);
-        return "user-create";
-    }
+//    @GetMapping("/admin/create")
+//    public String createUserForm(Model model) {
+//        model.addAttribute("user", new User());
+//        List<Role> roles = roleService.getRoleList();
+//        model.addAttribute("allRoles", roles);
+//        model.addAttribute("addUser", new User());
+//        return "user-create";
+//    }
 
     @PostMapping("/admin/create")
-    public String createUser(@ModelAttribute("user") User user) {
-//        if(userDetailsService.loadUserByUsername(user.getEmail())!= null){
-//            throw new RuntimeException("User with the email is exist");
-//        }
-        user.setRoles(Collections.singleton(new Role(1L)));
-        userService.saveUser(user);
+    public String createUser(@ModelAttribute("addUser") User user1,
+                             @RequestParam(value = "select_roles", required = false) String[] role) {
+        Set<Role> rol = new HashSet<>();
+        for (String s : role) {
+            if (s.equals("ROLE_ADMIN")) {
+                rol.add(roleService.getRoleList().get(1));
+            } else if (s.equals("ROLE_USER")) {
+                rol.add(roleService.getRoleList().get(0));
+            }
+        }
+
+        user1.setRoles(rol);
+        userService.saveUser(user1);
         return "redirect:/admin";
     }
 
@@ -82,6 +88,9 @@ public class AdminController {
     public String updateUser(@ModelAttribute("user") User user,
                              @RequestParam(value = "select_roles", required = false) String[] role) {
         user.setRoles(user.getRoles());
+//        if (user.getRoles()==null){
+//            user.setRoleSet(user.getRoleSet());
+//        }
         userService.update(user, role);
         return "redirect:/admin";
     }

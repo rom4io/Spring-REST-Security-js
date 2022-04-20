@@ -24,7 +24,7 @@ public class UserController {
         List<User> users = new ArrayList<>();
         User user = userService.findByName(principal.getName());
         users.add(user);
-        model.addAttribute("users", users);
-        return "user";
+        model.addAttribute("userPrincipal", user);
+        return "user-bootstrap";
     }
 }
