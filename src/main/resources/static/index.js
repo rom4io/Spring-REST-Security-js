@@ -35,7 +35,7 @@ function getAllUser() {
 <td>${user.roles.map(e => e.name).join(', ')}</td>
 <td> <button type="submit" data-toggle="modal" onclick="editModal(${user.id})" class="btn btn-info"
 data-target="#editModal"> Edit </button></td>
-<td><button type="submit" class="btn btn-danger" data-toggle="modal"  onclick="deleteModal(${user.id})"
+<td><button type="submit" class="btn btn-danger" data-toggle="modal"  onclick="modalDeleteUser(${user.id})"
 data-target="#deleteModal">Delete</button></td>
 </tr>`;
             });
