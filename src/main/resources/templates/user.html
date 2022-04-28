@@ -15,14 +15,8 @@
         <th>Age</th>
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.name}"></td>
-        <td th:text="${user.lastName}"></td>
-        <td th:text="${user.age}"></td>
-    </tr>
+    <tbody id="user-principal">
+
     </tbody>
 </table>
 <p/>
