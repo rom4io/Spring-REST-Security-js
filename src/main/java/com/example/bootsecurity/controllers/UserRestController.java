@@ -23,40 +23,46 @@ public class UserRestController {
         this.roleService = roleService;
     }
 
-//    @GetMapping("/user")
+    //    @GetMapping("/user")
 //    public ResponseEntity<User> userPrincipal(@AuthenticationPrincipal User user){
 //        return user != null?
 //                new ResponseEntity<>(user, HttpStatus.OK):
 //                new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //    }
     @GetMapping("/user")
-    public User userPrincipal(@AuthenticationPrincipal User user){
+    public User userPrincipal(@AuthenticationPrincipal User user) {
         return user;
     }
 
     @GetMapping("/users")
-    public List<User> showAllUsers(){
+    public List<User> showAllUsers() {
         List<User> allUsers = userService.findAll();
         return allUsers;
     }
+
     @GetMapping("/users/{id}")
-    public User userById(@PathVariable("id") Long id){
-        return userService.findById(id);
+    public ResponseEntity<User> userById(@PathVariable("id") Long id) {
+        User user = userService.findById(id);
+        return user != null
+                ? new ResponseEntity<>(user, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/users")
-    public void createUser(@RequestBody User user){
+    public void createUser(@RequestBody User user) {
         User newUser = user;
         userService.saveUser(newUser);
     }
 
-    public void updateUser(@RequestBody User user){
+    @PutMapping("/users")
+    public void updateUser(@RequestBody User user) {
         userService.updateUser(user);
     }
 
     @DeleteMapping("/users/{id}")
-    public void deleteUserById(@PathVariable("id")Long id){
+    public ResponseEntity<User> deleteUserById(@PathVariable("id") Long id) {
         userService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

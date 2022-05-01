@@ -33,7 +33,7 @@ public class AdminController {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         model.addAttribute("allRoles", roleService.getRoleList());
-        return "index";
+        return "index1";
     }
 
 //    @GetMapping(value = "/admin/{id}")
@@ -71,7 +71,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("admin/delete/{id}")
+    @DeleteMapping("admin/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
@@ -88,9 +88,6 @@ public class AdminController {
     public String updateUser(@ModelAttribute("user") User user,
                              @RequestParam(value = "select_roles", required = false) String[] role) {
         user.setRoles(user.getRoles());
-//        if (user.getRoles()==null){
-//            user.setRoleSet(user.getRoleSet());
-//        }
         userService.update(user, role);
         return "redirect:/admin";
     }

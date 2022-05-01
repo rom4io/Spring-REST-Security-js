@@ -29,7 +29,7 @@ public class User implements UserDetails {
 //    @Transient
 //    private String passwordConfirm;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "users_roles",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "roles_id"))
@@ -94,6 +94,10 @@ public class User implements UserDetails {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public boolean isAdmin() {
+        return (roleSet.toString()).contains("ADMIN");
     }
 
     @Override

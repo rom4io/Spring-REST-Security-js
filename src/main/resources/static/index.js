@@ -55,7 +55,19 @@ function modalDeleteUser(id) {
                 $("#deleteLastName").val(user.lastName)
                 $("#deleteAge").val(user.age)
                 $("#deleteEmail").val(user.email)
-                $("#deleteRoles").val(user.roles.map(e => e.name + " "))
+                $("#deleteRoles").val(user.roleSet.map(e => e.name + " "))
             })
         })
+}
+// Delete User
+async function deleteUser() {
+    await fetch("api/users/" + document.getElementById("deleteId").value,
+        {method:"DELETE", dataType:"JSON"})
+    $("#deleteUser.close").click();
+
+    getAllUser();
+}
+// Update Modal Window
+function modalUpdateUser(id) {
+fetch()
 }
