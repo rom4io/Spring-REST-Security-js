@@ -50,8 +50,7 @@ public class UserRestController {
 
     @PostMapping("/users")
     public void createUser(@RequestBody User user) {
-        User newUser = user;
-        userService.saveUser(newUser);
+        userService.saveUser(user);
     }
 
     @PutMapping("/users")

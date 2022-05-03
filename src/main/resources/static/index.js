@@ -94,7 +94,7 @@ async function updateUser() {
         age: document.getElementById('updateAge').value,
         email: document.getElementById('updateEmail').value,
         password: document.getElementById('updatePassword').value,
-        roleSet: getRole("#updateRoles")
+        roleSet: array2RoleSet("#updateRoles")
 
     }
 
@@ -105,15 +105,41 @@ async function updateUser() {
             body: JSON.stringify(user)
         })
 
-    $("#updateUser".close).click();
+    closeModal();
     getAllUsers();
     getUser();
 }
-// massiv2Set
-function getRole(address) {
+// New User
+async function createUser() {
+    let user ={
+        id: document.getElementById('updateId').value,
+        name: document.getElementById('createName').value,
+        lastName: document.getElementById('createLastname').value,
+        age: document.getElementById('createAge').value,
+        email: document.getElementById('createEmail').value,
+        password: document.getElementById('createPassword').value,
+        roleSet: array2RoleSet("#createRoles")
+    }
+
+    await fetch("/api/users",
+        {
+            method: 'POST',
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json;charset=UTF-8'},
+            body: JSON.stringify(user)
+        })
+
+    getAllUsers();
+    getUser();
+}
+// array2Set
+function array2RoleSet(address) {
     let data = [];
     $(address).find("option:selected").each(function () {
         data.push({id: $(this).val(), role: $(this).attr("name"), authority: $(this).attr("name")})
     });
     return data;
+}
+// Close Modal Window
+function closeModal() {
+    $.colorbox.close();
 }

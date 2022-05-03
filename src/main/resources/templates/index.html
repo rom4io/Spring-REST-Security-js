@@ -93,7 +93,7 @@
                                                 </div>
                                                 <div align="center">
                                                     <div class="modal-body">
-                                                        <div class="modal-body">
+                                                        <div class="form-group">
                                                             <label class="col-form-label"><strong>ID</strong></label>
                                                             <p/>
                                                             <input class="form-control" id="updateId" name="id"
@@ -101,17 +101,19 @@
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label class="col-form-label"><strong>First name</strong></label>
+                                                            <label class="col-form-label"><strong>First
+                                                                name</strong></label>
                                                             <p/>
                                                             <input class="form-control-sm"
                                                                    id="updateName" name="name">
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label class="col-form-label"><strong>Last name</strong></label>
+                                                            <label class="col-form-label"><strong>Last
+                                                                name</strong></label>
                                                             <p/>
                                                             <input class="form-control-sm" id="updateLastname"
-                                                            name="lastName">
+                                                                   name="lastName">
                                                         </div>
 
                                                         <div class="form-group">
@@ -242,58 +244,53 @@
                                 <h4>Add new user</h4>
                             </div>
                             <div class="container-fluid border bg-white">
-                                <form th:action="@{/admin/create}" th:object="${user}" method="post">
+                                <form id="createUserForm">
                                     <div class="text-center">
                                         <div class="form-group">
-                                            <label for="name"><strong>First name</strong></label>
+                                            <label class="col-form-label"><strong>First name</strong></label>
                                             <p/>
-                                            <input type="text" class="form-control-sm" th:field="*{name}" id="name"
-                                                   placeholder="Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="lastName"><strong>Last name</strong></label>
-                                            <p/>
-                                            <input type="text" class="form-control-sm" th:field="*{lastName}"
-                                                   id="lastName"
-                                                   placeholder="Last Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="age"><strong>Age</strong></label>
-                                            <p/>
-                                            <input type="number" class="form-control-sm" th:field="*{age}" id="age"
-                                                   placeholder="Age">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email"><strong>Email</strong></label>
-                                            <p/>
-                                            <input type="text" class="form-control-sm" th:field="*{email}" id="email"
-                                                   placeholder="Email">
+                                            <input class="form-control-sm"
+                                                   id="createName" name="name">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="password"><strong>Password</strong></label>
+                                            <label class="col-form-label"><strong>Last name</strong></label>
                                             <p/>
-                                            <input type="password" class="form-control-sm" th:field="*{password}"
-                                                   id="password"
-                                                   placeholder="Password">
+                                            <input class="form-control-sm" id="createLastname"
+                                                   name="lastName">
                                         </div>
 
                                         <div class="form-group">
-                                            <label><strong>Role</strong>
-
-                                                <select multiple size="2"
-                                                        name="select_roles"
-                                                        class="form-control"
-                                                        id="role">
-                                                    <option th:each="role : ${allRoles}"
-                                                            th:value="${role.getName()}"
-                                                            th:text="${role.getAuthority() == 'ROLE_ADMIN'} ? 'ROLE_ADMIN' : 'ROLE_USER'"
-                                                            class="form-control-sm"></option>
-                                                </select>
-                                            </label>
+                                            <label class="col-form-label"><strong>Age</strong></label>
+                                            <p/>
+                                            <input class="form-control-sm"
+                                                   id="createAge">
                                         </div>
 
-                                        <input type="submit" value="Create User">
+                                        <div class="form-group">
+                                            <label class="col-form-label"><strong>Email</strong></label>
+                                            <p/>
+                                            <input class="form-control-sm"
+                                                   id="createEmail">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-form-label"><strong>Password</strong></label>
+                                            <p/>
+                                            <input class="form-control-sm"
+                                                   id="createPassword">
+                                        </div>
+
+                                        <div class="form-group" style="text-align: center">
+                                            <label><b>Roles</b></label>
+                                            <select multiple class="form-control" size="2"
+                                                    id="createRoles" name="rolesId">
+                                                <option value="1" selected="selected">USER</option>
+                                                <option value="2">ADMIN</option>
+                                            </select>
+                                        </div>
+
+                                        <input type="submit" value="Create User" onclick="createUser()">
                                     </div>
                                 </form>
                             </div>

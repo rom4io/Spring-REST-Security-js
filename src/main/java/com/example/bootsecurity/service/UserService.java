@@ -33,10 +33,7 @@ public class UserService{
         return userRepository.findById(id).get();
     }
 
-    public void saveUser(User user){
-
-        userRepository.save(user);
-    }
+    public void saveUser(User user){userRepository.save(user);}
 
     public void deleteById(long id){
         userRepository.deleteById(id);
