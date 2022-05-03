@@ -33,7 +33,7 @@ function getAllUser() {
 <td>${user.age}</td>
 <td>${user.email}</td>
 <td>${user.roles.map(e => e.name).join(', ')}</td>
-<td> <button type="submit" data-toggle="modal" onclick="editModal(${user.id})" class="btn btn-info"
+<td> <button type="submit" data-toggle="modal" onclick="modalUpdateUser(${user.id})" class="btn btn-info"
 data-target="#editModal"> Edit </button></td>
 <td><button type="submit" class="btn btn-danger" data-toggle="modal"  onclick="modalDeleteUser(${user.id})"
 data-target="#deleteModal">Delete</button></td>
@@ -59,15 +59,53 @@ function modalDeleteUser(id) {
             })
         })
 }
+
 // Delete User
 async function deleteUser() {
     await fetch("api/users/" + document.getElementById("deleteId").value,
-        {method:"DELETE", dataType:"JSON"})
-    $("#deleteUser.close").click();
+        {method: "DELETE", dataType: "JSON"})
+    $("#deleteUser".close).click();
 
     getAllUser();
 }
+
 // Update Modal Window
 function modalUpdateUser(id) {
-fetch()
+    fetch("/api/users/" + id, {method: "GET", datatype: "JSON"})
+        .then(res => {
+            res.json()
+                .then(user => {
+                    $("#updateId").val(user.id)
+                    $("#updateName").val(user.name)
+                    $("#updateLastname").val(user.lastName)
+                    $("#updateAge").val(user.age)
+                    $("#updateEmail").val(user.email)
+                    $("#updatePassword").val(user.password)
+                    $("#updateRoles").val(user.roleSet.map(e => e.name + " "))
+                })
+        })
+}
+// Update User
+async function updateUser() {
+    let user = {
+        id: document.getElementById('updateId').value,
+        name: document.getElementById('updateName').value,
+        lastName: document.getElementById('updateLastname').value,
+        age: document.getElementById('updateAge').value,
+        email: document.getElementById('updateEmail').value,
+        password: document.getElementById('updatePassword').value,
+        roles: $('updateRoles').value,
+    }
+
+    await fetch("/api/users",
+        {
+            method: 'PUT',
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json;charset=UTF-8'},
+            body: JSON.stringify(user)
+        })
+
+    $("#updateUser".close).click();
+    getAllUsers();
+    getUser();
+
 }
