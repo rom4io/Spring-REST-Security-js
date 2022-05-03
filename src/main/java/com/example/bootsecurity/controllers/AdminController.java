@@ -4,7 +4,6 @@ import com.example.bootsecurity.entity.Role;
 import com.example.bootsecurity.entity.User;
 import com.example.bootsecurity.service.RoleService;
 import com.example.bootsecurity.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,7 @@ public class AdminController {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         model.addAttribute("allRoles", roleService.getRoleList());
-        return "index1";
+        return "index";
     }
 
 //    @GetMapping(value = "/admin/{id}")

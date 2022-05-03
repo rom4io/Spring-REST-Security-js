@@ -94,7 +94,8 @@ async function updateUser() {
         age: document.getElementById('updateAge').value,
         email: document.getElementById('updateEmail').value,
         password: document.getElementById('updatePassword').value,
-        roles: $('updateRoles').value,
+        roleSet: getRole("#updateRoles")
+
     }
 
     await fetch("/api/users",
@@ -107,5 +108,12 @@ async function updateUser() {
     $("#updateUser".close).click();
     getAllUsers();
     getUser();
-
+}
+// massiv2Set
+function getRole(address) {
+    let data = [];
+    $(address).find("option:selected").each(function () {
+        data.push({id: $(this).val(), role: $(this).attr("name"), authority: $(this).attr("name")})
+    });
+    return data;
 }
