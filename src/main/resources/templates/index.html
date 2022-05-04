@@ -79,7 +79,7 @@
                                     </thead>
                                     <tbody id="users"></tbody>
                                     <!-- Модальное окно редактирования юзера -->
-                                    <div class="modal fade" th:id="editModal" tabindex="-1"
+                                    <div class="modal fade" id="editModal" tabindex="-1"
                                          aria-labelledby="editModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -151,7 +151,7 @@
                                                                 data-dismiss="modal">Close
                                                         </button>
                                                         <button type="submit" class="btn btn-primary"
-                                                                onclick="updateUser()">Edit
+                                                                onclick="updateUser()" data-dismiss="modal">Edit
                                                         </button>
                                                     </div>
                                                 </div>
@@ -228,7 +228,8 @@
                                                     <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Close
                                                     </button>
-                                                    <button type="submit" class="btn btn-danger" onclick="deleteUser()">
+                                                    <button type="submit" class="btn btn-danger" onclick="deleteUser()"
+                                                    data-dismiss="modal">
                                                         Delete
                                                     </button>
                                                 </div>

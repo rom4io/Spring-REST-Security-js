@@ -64,7 +64,7 @@ function modalDeleteUser(id) {
 async function deleteUser() {
     await fetch("api/users/" + document.getElementById("deleteId").value,
         {method: "DELETE", dataType: "JSON"})
-    $("#deleteUser".close).click();
+    $("#deleteModal.close").click();
 
     getAllUser();
 }
@@ -103,11 +103,10 @@ async function updateUser() {
             method: 'PUT',
             headers: {'Accept': 'application/json', 'Content-Type': 'application/json;charset=UTF-8'},
             body: JSON.stringify(user)
-        })
+        }).then(() => {getAllUser()})
 
-    closeModal();
-    getAllUsers();
-    getUser();
+
+
 }
 // New User
 async function createUser() {
